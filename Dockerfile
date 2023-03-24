@@ -1,12 +1,12 @@
 FROM node:10.16.0-alpine
 
-RUN mkdir /usr/src/app
+RUN mkdir -p /var/www/html
 WORKDIR /usr/src/app
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 COPY package.json /usr/src/app/package.json
-RUN npm install
-RUN npm install react-scripts -g
+RUN yarn install
+RUN yarn install react-scripts -g
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
