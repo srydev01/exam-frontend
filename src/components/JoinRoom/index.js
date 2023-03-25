@@ -3,6 +3,10 @@ import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import React from "react"
 import { firestore } from "../../config/firebase";
 
+//Toast
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 export default function JoinRoom({ uid, name, room, setRoom, setStep }) {
 
   const submitRoom = async (e) => {
@@ -16,7 +20,9 @@ export default function JoinRoom({ uid, name, room, setRoom, setStep }) {
             setStep('chat_room')
           })
         } else {
-          alert("ไม่พบห้อง")
+          toast.error("ไม่พบห้อง", {
+            position: 'bottom-right'
+          })
         }
       })
     } else {
@@ -31,6 +37,7 @@ export default function JoinRoom({ uid, name, room, setRoom, setStep }) {
         <input
           type='text'
           className='input'
+          autoFocus
           value={room}
           onChange={e => setRoom(e.target.value)}
         />
@@ -50,6 +57,7 @@ export default function JoinRoom({ uid, name, room, setRoom, setStep }) {
           </Button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   )
 }

@@ -40,6 +40,7 @@ export default function CreateRoom({ uid, name, room, setRoom, setStep }) {
         <input
           type='text'
           className='input'
+          autoFocus
           value={room}
           onChange={e => setRoom(e.target.value)}
         />

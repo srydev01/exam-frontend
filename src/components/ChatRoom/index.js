@@ -17,7 +17,7 @@ export default function ChatRoom({ uid, name, room }) {
 
   useEffect(() => {
     if (roomRef) {
-      const SubscribeRetrieveMessage = onSnapshot(query(collection(roomRef, 'messages')), orderBy('seq', 'desc'), (data) => {
+      const SubscribeRetrieveMessage = onSnapshot(query(collection(roomRef, 'messages'), orderBy('seq', 'desc')), (data) => {
         setMessages(data.docs.map(ms => ms.data()));
       })
       return () => SubscribeRetrieveMessage();
@@ -92,6 +92,7 @@ export default function ChatRoom({ uid, name, room }) {
       <form onSubmit={sendMessage}>
         <input
           className="input input-message"
+          autoFocus
           value={inputMsg}
           onChange={e => SetInputMsg(e.target.value)}
         />

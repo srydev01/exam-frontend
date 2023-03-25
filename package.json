@@ -17,6 +17,7 @@
     "react-morph": "^0.4.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "3.4.0",
+    "react-toastify": "^9.0.3",
     "resolve-url-loader": "^3.1.1"
   },
   "scripts": {

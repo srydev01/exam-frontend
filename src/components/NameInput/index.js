@@ -19,6 +19,7 @@ export default function NameInput({ name, setName, setStep }) {
         <input
           type='text'
           className='input'
+          autoFocus
           value={name}
           onChange={e => setName(e.target.value)}
         />
