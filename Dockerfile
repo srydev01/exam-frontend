@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 COPY package.json /usr/src/app/package.json
-RUN yarn install
-RUN yarn install react-scripts -g
+RUN npm install
+RUN npm install react-scripts -g
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
