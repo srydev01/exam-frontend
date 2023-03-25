@@ -5,7 +5,11 @@ export default function NameInput({ name, setName, setStep }) {
 
   const submitName = (e) => {
     e.preventDefault();
-    setStep('name_created');
+    if (name.replace(/\s/g, '').length) {
+      setStep('name_created');
+    } else {
+      setName("")
+    }
   }
 
   return (

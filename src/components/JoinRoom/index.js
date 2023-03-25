@@ -7,17 +7,21 @@ export default function JoinRoom({ uid, name, room, setRoom, setStep }) {
 
   const submitRoom = async (e) => {
     e.preventDefault();
-    getDoc(doc(firestore, 'room', room)).then(roomExisting => {
-      if (roomExisting.data()) {
-        setDoc(doc(collection(doc(firestore, 'room', room), 'member'), uid), {
-          name: name
-        }).then(() => {
-          setStep('chat_room')
-        })
-      } else {
-        alert("ไม่พบห้อง")
-      }
-    })
+    if (room.replace(/\s/g, '').length) {
+      getDoc(doc(firestore, 'room', room)).then(roomExisting => {
+        if (roomExisting.data()) {
+          setDoc(doc(collection(doc(firestore, 'room', room), 'member'), uid), {
+            name: name
+          }).then(() => {
+            setStep('chat_room')
+          })
+        } else {
+          alert("ไม่พบห้อง")
+        }
+      })
+    } else {
+      setRoom("")
+    }
   }
 
   return (

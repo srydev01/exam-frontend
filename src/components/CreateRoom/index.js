@@ -7,26 +7,30 @@ export default function CreateRoom({ uid, name, room, setRoom, setStep }) {
 
   const submitRoom = async (e) => {
     e.preventDefault();
-    getDoc(doc(firestore, 'room', room)).then(roomExisting => {
-      if (roomExisting.data()) {
-        setDoc(doc(collection(doc(firestore, 'room', room), 'member'), uid), {
-          name: name
-        }).then(() => {
-          setStep('chat_room')
-        })
-      } else {
-        setDoc(doc(firestore, 'room', room), {
-          room: room
-        }).then(async () => {
-          const roomRef = await doc(firestore, 'room', room)
-          setDoc(doc(collection(roomRef, 'member'), uid), {
+    if (room.replace(/\s/g, '').length) {
+      getDoc(doc(firestore, 'room', room)).then(roomExisting => {
+        if (roomExisting.data()) {
+          setDoc(doc(collection(doc(firestore, 'room', room), 'member'), uid), {
             name: name
           }).then(() => {
             setStep('chat_room')
           })
-        })
-      }
-    })
+        } else {
+          setDoc(doc(firestore, 'room', room), {
+            room: room
+          }).then(async () => {
+            const roomRef = await doc(firestore, 'room', room)
+            setDoc(doc(collection(roomRef, 'member'), uid), {
+              name: name
+            }).then(() => {
+              setStep('chat_room')
+            })
+          })
+        }
+      })
+    } else {
+      setRoom("")
+    }
   }
 
   return (
